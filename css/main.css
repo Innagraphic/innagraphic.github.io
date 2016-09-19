@@ -290,6 +290,32 @@ div.row img {
 	div.box {
 		text-align: center;
 	}
+	div h2 {
+		font-family: 'Roboto', sans-serif;
+		font-weight: 400;
+		font-size: 22px;
+	}
+	div.pink h2 {
+		color: #A42C5F;
+	}
+	div.yellow h2 {
+		color: #d7b441;
+	}
+	div.red h2 {
+		color: #ce2031;
+	}
+	div.blue h2 {
+		color: #00487a;
+	}
+	div.orange h2 {
+		color: #c3463c;
+	}
+	div.lightblue h2 {
+		color: #006e79;
+	}
+	.footer img {
+		width: 4rem;
+	}
 }
 @media (max-width: 768px) {
 	html body {
