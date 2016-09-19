@@ -1,7 +1,5 @@
 $(document).ready(function () {
     $('#contact_form').bootstrapValidator({
-
-        
         fields: {
             name: {
                 validators: {
@@ -33,7 +31,7 @@ $(document).ready(function () {
                     }
                 }
             },
-            comment: {
+            message: {
                 validators: {
                     stringLength: {
                         min: 10,
@@ -46,23 +44,35 @@ $(document).ready(function () {
                 }
             }
         }
-    })
-        .on('success.form.bv', function (e) {
-            $('#success_message').slideDown({ opacity: "show" }, "slow") // Do something ...
-            $('#contact_form').data('bootstrapValidator').resetForm();
+    }).on('success.form.bv', function (e) {
+        $('#success_message').slideDown({ opacity: "show" }, "slow"); // Do something ...
+        $('#contact_form').slideUp({ opacity: "hide" }, "fast");
 
-            // Prevent form submission
-            e.preventDefault();
+        // Prevent form submission
+        e.preventDefault();
 
-            // Get the form instance
-            var $form = $(e.target);
+        // Get the form instance
+        var $form = $(e.target);
 
-            // Get the BootstrapValidator instance
-            var bv = $form.data('bootstrapValidator');
-
-            // Use Ajax to submit form data
-            $.post($form.attr('action'), $form.serialize(), function (result) {
-                console.log(result);
-            }, 'json');
-        });
+        // Get the BootstrapValidator instance
+        var bv = $form.data('bootstrapValidator');
+        var data = {
+            name: $('#name').val(),
+            email: $('#email').val(),
+            message: $('#message').val()
+        };
+        $.ajax({
+            type: 'POST',
+            url: $form.attr('action'),
+            dataType: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            success: function () {
+              // clear form and show a success message
+            },
+            error: function () {
+              // show an error message
+            }
+          });
+    });
 });
